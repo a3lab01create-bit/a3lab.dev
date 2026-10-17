@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a3lab | 일하는 방식에 AI를 연결합니다</title>
+<meta name="description" content="a3lab은 회사에 이미 있는 데이터와 도구를 AI 에이전트로 연결하는 AX 스튜디오입니다. Claude, Gemini, GPT 등 여러 AI가 역할을 나눠 반복 업무를 처리합니다.">
+<link rel="canonical" href="https://a3lab.dev/">
+<meta name="theme-color" content="#faf9f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111012" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="a3lab">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://a3lab.dev/">
+<meta property="og:title" content="a3lab | 일하는 방식에 AI를 연결합니다">
+<meta property="og:description" content="a3lab은 회사에 이미 있는 데이터와 도구를 AI 에이전트로 연결하는 AX 스튜디오입니다. Claude, Gemini, GPT 등 여러 AI가 역할을 나눠 반복 업무를 처리합니다.">
+<meta property="og:image" content="https://a3lab.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="a3lab 로고와 '일하는 방식에 AI를 연결합니다' 문구">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="a3lab | 일하는 방식에 AI를 연결합니다">
+<meta name="twitter:description" content="a3lab은 회사에 이미 있는 데이터와 도구를 AI 에이전트로 연결하는 AX 스튜디오입니다. Claude, Gemini, GPT 등 여러 AI가 역할을 나눠 반복 업무를 처리합니다.">
+<meta name="twitter:image" content="https://a3lab.dev/og.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+/* Layout: one long scroll of full-bleed bands, each with a 1200px inner column. A live SVG line field bleeds behind a giant outlined wordmark in the hero, and returns settled into straight lines in the contact band. */
+:root{
+  --bg:#faf9f9;
+  --bg-2:#f2eff1;
+  --ink:#1c1a1b;
+  --ink-2:#5e595c;
+  --line:#dcd7da;
+  --line-2:#b7b0b4;
+  --wm:#d6d0d3;
+  --accent:#e0005f;
+  --accent-ink:#c10052;
+  --on-accent:#ffffff;
+  --inv-bg:#1c1a1b;
+  --inv-fg:#f6f3f5;
+  --inv-fg-2:#aaa3a8;
+  --inv-line:#3a3538;
+  --inv-accent:#ff4d92;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,"IBM Plex Sans KR",monospace;
+  --col:1200px;
+  --gut:clamp(16px,4vw,56px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111012; --bg-2:#18161a; --ink:#f1eef0; --ink-2:#a9a3a7; --line:#2c282b; --line-2:#4a4449; --wm:#3a3539;
+    --accent:#ff4d92; --accent-ink:#ff74aa; --on-accent:#1a0610;
+    --inv-bg:#f1eef0; --inv-fg:#141214; --inv-fg-2:#5e595c; --inv-line:#d6d0d4; --inv-accent:#c10052;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111012; --bg-2:#18161a; --ink:#f1eef0; --ink-2:#a9a3a7; --line:#2c282b; --line-2:#4a4449; --wm:#3a3539;
+  --accent:#ff4d92; --accent-ink:#ff74aa; --on-accent:#1a0610;
+  --inv-bg:#f1eef0; --inv-fg:#141214; --inv-fg-2:#5e595c; --inv-line:#d6d0d4; --inv-accent:#c10052;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;overflow-x:clip;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{width:100%;max-width:calc(var(--col) + 2 * var(--gut));margin-inline:auto;padding-left:max(var(--gut), env(safe-area-inset-left, 0px));padding-right:max(var(--gut), env(safe-area-inset-right, 0px))}
+.mono{font-family:var(--f-mono)}
+.eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 20px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.h-en{margin:0;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-.035em;text-wrap:balance}
+.h-kr{margin:16px 0 0;font-size:clamp(17px,1.6vw,20px);font-weight:500;color:var(--ink-2)}
+.sec{padding-block:clamp(88px,12vw,168px);scroll-margin-top:64px;border-top:1px solid var(--line)}
+.sec-alt{background:var(--bg-2)}
+.sec-head.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px 64px;align-items:end}
+.prose{display:grid;gap:18px;max-width:34em}
+.prose p{margin:0;font-size:clamp(16px,1.35vw,18px);color:var(--ink-2)}
+.prose p strong{color:var(--ink);font-weight:600}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.logo{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:22px;letter-spacing:-.04em;text-decoration:none;color:var(--ink)}
+.logo b{color:var(--accent);font-weight:inherit}
+.nav ul{display:flex;align-items:center;gap:28px;margin:0;padding:0;list-style:none}
+.nav .link{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;transition:color .2s}
+.nav .link:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;height:34px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);transition:background .2s,color .2s}
+.pill:hover{background:var(--ink);color:var(--bg)}
+
+/* hero */
+.hero{position:relative;overflow:clip;padding-top:clamp(48px,8vw,112px)}
+.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+.field path{fill:none;stroke:var(--line-2);stroke-width:1;vector-effect:non-scaling-stroke}
+.field path.sig{stroke:var(--accent);stroke-width:1.75}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px 56px;align-items:end}
+.hero-title{margin:0;font-weight:600;font-size:clamp(40px,6.2vw,86px);line-height:1.12;letter-spacing:-.035em;text-wrap:balance}
+.hero-title em{font-style:normal;color:var(--accent-ink)}
+.hero-side{display:grid;gap:28px;padding-bottom:8px}
+.hero-sub{margin:0;font-size:clamp(16px,1.35vw,18px);color:var(--ink-2);max-width:30em}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 24px;border-radius:999px;font-size:15px;font-weight:500;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.btn svg{width:16px;height:16px;transition:transform .25s}
+.btn:hover svg{transform:translateX(3px)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--accent-ink)}
+.btn.ghost{border:1px solid var(--ink);color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.hero-meta{position:relative;z-index:2;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;margin-top:clamp(40px,6vw,72px);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.hero-meta #snr{font-variant-numeric:tabular-nums}
+.hero-meta #snr b{color:var(--accent-ink);font-weight:500}
+.wordmark-wrap{position:relative;z-index:1;margin-top:clamp(72px,11vw,160px);pointer-events:none}
+.wordmark{font-family:var(--f-display);font-stretch:125%;font-weight:900;font-size:clamp(100px,24vw,380px);line-height:.78;letter-spacing:-.05em;white-space:nowrap;color:var(--bg);-webkit-text-stroke:1.5px var(--ink);margin-bottom:-.14em;will-change:transform}
+
+/* manifesto + marquee */
+.marquee{overflow:clip;margin-top:clamp(64px,9vw,120px);display:grid;gap:4px}
+.mq{display:flex;align-items:center;gap:.35em;width:max-content;white-space:nowrap;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(52px,10.5vw,156px);line-height:1.04;letter-spacing:-.04em;will-change:transform}
+.mq i{display:inline-block;width:.16em;height:.16em;border-radius:50%;background:var(--accent);flex:none}
+.mq.outline{font-family:var(--f-body);font-weight:600;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1.25px var(--ink)}
+.mq.outline i{background:transparent;border:1.25px solid var(--ink)}
+
+/* steps */
+.steps{list-style:none;margin:clamp(48px,7vw,88px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px 32px}
+.step{position:relative;padding-top:28px;--fill:0}
+.step::before,.step::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--line-2)}
+.step::after{height:2px;top:-.5px;background:var(--accent);transform-origin:left;transform:scaleX(var(--fill))}
+.step-num{position:absolute;right:-4px;top:4px;z-index:0;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(84px,9vw,128px);line-height:1;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px var(--wm);pointer-events:none;will-change:transform}
+.step > *:not(.step-num){position:relative;z-index:1}
+.step-en{margin:0 0 6px;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.step h3{margin:0 0 12px;font-size:26px;font-weight:600;letter-spacing:-.02em}
+.step p.d{margin:0;color:var(--ink-2);font-size:15.5px}
+
+/* flow */
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px 56px;align-items:center;margin-top:clamp(48px,7vw,80px)}
+.flow-stage{min-width:0}
+.flow-stage svg{display:block;width:100%;height:auto;overflow:visible}
+#flowSvg .edge{fill:none;stroke:var(--line-2);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.75;transition:stroke .25s,opacity .25s}
+#flowSvg .edge.on{stroke:var(--accent);stroke-width:1.75;opacity:1}
+#flowSvg .dot{fill:var(--line-2)}
+#flowSvg .dot.on{fill:var(--accent)}
+#flowSvg .node{cursor:pointer;outline:none}
+#flowSvg .node rect{fill:var(--bg);stroke:var(--line-2);stroke-width:1;vector-effect:non-scaling-stroke;transition:fill .2s,stroke .2s}
+#flowSvg .node text{fill:var(--ink);font-family:var(--f-body);font-weight:500;transition:fill .2s}
+#flowSvg .node:hover rect{stroke:var(--ink)}
+#flowSvg .node:focus-visible rect{stroke:var(--accent);stroke-width:2}
+#flowSvg .node.on rect{fill:var(--accent);stroke:var(--accent)}
+#flowSvg .node.on text{fill:var(--on-accent)}
+#flowSvg .hub-ring{fill:none;stroke:var(--line-2);stroke-width:1;stroke-dasharray:3 6;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:spin 18s linear infinite}
+#flowSvg .hub-t2{fill:var(--ink-2);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em}
+#flowSvg .tedge{fill:none;stroke:var(--line-2);stroke-width:1;stroke-dasharray:2 4;vector-effect:non-scaling-stroke;transition:stroke .25s}
+#flowSvg .tedge.on{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:none}
+#flowSvg .agent circle{fill:var(--bg);stroke:var(--line-2);stroke-width:1;vector-effect:non-scaling-stroke;transition:fill .25s,stroke .25s}
+#flowSvg .agent text{fill:var(--ink-2);font-family:var(--f-body);font-weight:500;transition:fill .25s}
+#flowSvg .agent.on circle{fill:var(--ink);stroke:var(--ink)}
+#flowSvg .agent.on text{fill:var(--bg)}
+#flowSvg .colhead{fill:var(--ink-2);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em}
+@keyframes spin{to{transform:rotate(360deg)}}
+.flow-cap{border-top:1px solid var(--ink);padding-top:20px;min-width:0}
+.cap-route{margin:0 0 12px;font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--accent-ink)}
+.cap-text{margin:0 0 24px;font-size:19px;line-height:1.6;font-weight:500;text-wrap:pretty}
+.cap-model{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.cap-hint{margin:10px 0 0;font-size:13px;color:var(--ink-2)}
+
+/* principles */
+.pr-grid{list-style:none;margin:clamp(48px,7vw,80px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 56px}
+.pr{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 20px;padding-top:24px;border-top:1px solid var(--line)}
+.pr svg{grid-row:span 2;width:32px;height:32px;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.pr:hover svg{stroke:var(--accent)}
+.pr h3{margin:0;font-size:21px;font-weight:600;letter-spacing:-.02em}
+.pr p{margin:6px 0 0;color:var(--ink-2);font-size:15.5px;max-width:32em}
+
+/* contact */
+.contact{position:relative;overflow:clip;background:var(--inv-bg);color:var(--inv-fg);padding-block:clamp(96px,13vw,180px);scroll-margin-top:64px}
+.calm{position:absolute;inset:0;width:100%;height:100%;display:block}
+.calm line{stroke:var(--inv-line);stroke-width:1;vector-effect:non-scaling-stroke}
+.calm line.sig{stroke:var(--inv-accent);stroke-width:1.75}
+.contact-inner{position:relative;z-index:1}
+.contact .eyebrow{color:var(--inv-fg-2)}
+.contact .eyebrow::before{background:var(--inv-accent)}
+.h-xl{margin:0;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(46px,8.6vw,128px);line-height:.96;letter-spacing:-.045em;text-wrap:balance}
+.contact-kr{margin:24px 0 0;font-size:clamp(17px,1.6vw,20px);color:var(--inv-fg-2);max-width:30em}
+.mail-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:clamp(40px,5vw,64px);padding-top:28px;border-top:1px solid var(--inv-line)}
+.mail{font-family:var(--f-display);font-stretch:110%;font-weight:600;font-size:clamp(22px,3vw,36px);letter-spacing:-.02em;min-width:0;overflow-wrap:anywhere;color:var(--inv-fg);text-decoration:none;background:linear-gradient(var(--inv-accent),var(--inv-accent)) left bottom/0 2px no-repeat;transition:background-size .3s}
+.mail:hover{background-size:100% 2px}
+.copy{height:38px;padding:0 18px;border-radius:999px;border:1px solid var(--inv-fg);background:transparent;color:var(--inv-fg);font-family:var(--f-body);font-size:14px;font-weight:500;cursor:pointer;transition:background .2s,color .2s}
+.copy:hover{background:var(--inv-fg);color:var(--inv-bg)}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--inv-fg-2);border:1px dashed var(--inv-fg-2);border-radius:999px;padding:3px 10px}
+
+/* footer */
+.foot{background:var(--inv-bg);color:var(--inv-fg-2);border-top:1px solid var(--inv-line);padding-block:32px}
+.foot .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px}
+.foot .logo{color:var(--inv-fg);font-size:20px}
+.foot .logo b{color:var(--inv-accent)}
+.foot p{margin:0;font-size:13px}
+.foot .kw{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+
+@media (max-width:980px){
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .hero-inner,.sec-head.two{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .nav .hide-sm{display:none}
+  .steps,.pr-grid{grid-template-columns:minmax(0,1fr)}
+  .btn{height:48px;padding:0 20px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  #flowSvg .hub-ring{animation:none}
+  .btn svg{transition:none}
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="주요 메뉴">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="a3lab 처음으로">a<b>3</b>lab</a>
+    <ul>
+      <li class="hide-sm"><a class="link" href="#work">Work</a></li>
+      <li class="hide-sm"><a class="link" href="#flow">Flow</a></li>
+      <li class="hide-sm"><a class="link" href="#principles">Principles</a></li>
+      <li><a class="pill" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="field" id="field" aria-hidden="true" focusable="false"></svg>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">AI transformation studio</p>
+        <h1 class="hero-title">일하는 방식에<br><em>AI</em>를 연결합니다</h1>
+      </div>
+      <div class="hero-side">
+        <p class="hero-sub">회사에 이미 있는 데이터와 도구를 AI 에이전트로 묶습니다. 직원들은 지금 쓰는 화면에서 버튼 하나로 결과를 받습니다.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contact">프로젝트 문의<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn ghost" href="#flow">연결 구조 보기</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <span id="hint">Move the cursor through the noise</span>
+      <span id="snr" aria-hidden="true">noise <b>100</b>% / signal <b>0</b>%</span>
+    </div>
+  </div>
+  <div class="wrap wordmark-wrap" aria-hidden="true">
+    <div class="wordmark" id="wordmark">a3lab</div>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="about">
+    <div class="wrap sec-head two">
+      <div>
+        <p class="eyebrow">From scattered to connected</p>
+        <h2 class="h-en">Scattered work,<br>one flow.</h2>
+        <p class="h-kr">흩어진 일을 하나의 흐름으로</p>
+      </div>
+      <div class="prose">
+        <p>엑셀, 메신저, 쇼핑몰 관리자, 공유 드라이브. 회사의 일은 여러 곳에 흩어져 있고, 같은 정보를 사람이 몇 번씩 옮겨 적습니다.</p>
+        <p><strong>a3lab은 흩어진 지점을 하나로 연결하고, 반복되는 일은 AI 에이전트에게 맡깁니다.</strong> 사람은 확인하고 결정하는 일에 집중합니다.</p>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="mq" data-dir="-1"><span>Connect</span><i></i><span>Automate</span><i></i><span>Adopt</span><i></i><span>Connect</span><i></i><span>Automate</span><i></i><span>Adopt</span><i></i><span>Connect</span><i></i><span>Automate</span><i></i><span>Adopt</span><i></i></div>
+      <div class="mq outline" data-dir="1"><span>연결한다</span><i></i><span>자동화한다</span><i></i><span>정착시킨다</span><i></i><span>연결한다</span><i></i><span>자동화한다</span><i></i><span>정착시킨다</span><i></i><span>연결한다</span><i></i><span>자동화한다</span><i></i><span>정착시킨다</span><i></i></div>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What we do</p>
+        <h2 class="h-en">Four steps to AX.</h2>
+        <p class="h-kr">AX는 네 단계로 진행합니다</p>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="step">
+          <span class="step-num" data-speed="0.10" aria-hidden="true">01</span>
+          <p class="step-en">Diagnose</p>
+          <h3>진단</h3>
+          <p class="d">어떤 일을 AI에 맡길지부터 정합니다. 업무 흐름과 데이터 상태를 살펴보고, 효과가 가장 큰 일 하나를 고릅니다.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" data-speed="0.16" aria-hidden="true">02</span>
+          <p class="step-en">Connect</p>
+          <h3>연결</h3>
+          <p class="d">상품 DB, 구글 시트, 사내 문서를 AI가 읽을 수 있게 정리하고, MCP 서버로 연결합니다.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" data-speed="0.10" aria-hidden="true">03</span>
+          <p class="step-en">Build</p>
+          <h3>구축</h3>
+          <p class="d">상세페이지 작성, 리포트 정리, 문의 응대처럼 매일 반복되는 일을 여러 AI 에이전트가 나눠 맡게 만듭니다. 한 AI가 만든 결과는 다른 AI가 검토합니다.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" data-speed="0.16" aria-hidden="true">04</span>
+          <p class="step-en">Adopt</p>
+          <h3>정착</h3>
+          <p class="d">직원들이 실제로 쓸 때까지 함께합니다. 사용 가이드를 만들고, 운영하면서 생기는 문제를 같이 고칩니다.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="flow">
+    <div class="wrap">
+      <div class="sec-head two">
+        <div>
+          <p class="eyebrow">How it connects</p>
+          <h2 class="h-en">Data in,<br>finished work out.</h2>
+          <p class="h-kr">회사 데이터가 들어가고, 완성된 결과가 나옵니다</p>
+        </div>
+        <div class="prose">
+          <p>회사에 이미 있는 데이터가 AI 팀을 거쳐, 직원이 바로 쓸 수 있는 결과로 나옵니다. 항목을 누르면 어떤 AI가 어떤 일을 나눠 맡는지 볼 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-stage" id="flowStage">
+          <svg id="flowSvg" role="group" aria-label="데이터 연결 구조. 항목을 선택하면 처리 흐름 설명이 바뀝니다."></svg>
+        </div>
+        <div class="flow-cap" aria-live="polite">
+          <p class="cap-route" id="capRoute">상품 DB → Claude + Gemini → 상세페이지 초안 · 상품 이미지</p>
+          <p class="cap-text" id="capText">상품 코드를 고르면 Claude가 소재와 핏 정보를 읽어 상세페이지 문구를 쓰고, Gemini가 그 문구에 맞춰 상품 이미지 초안을 만듭니다.</p>
+          <p class="cap-model">AI team · Claude, Gemini, GPT 등</p>
+          <p class="cap-hint">여러 AI가 역할을 나눠 일하고, 작업 기록은 공유 메모리에 남깁니다. 다음 작업에서도 앞의 맥락을 그대로 이어 갑니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="principles">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Principles</p>
+        <h2 class="h-en">How we work.</h2>
+        <p class="h-kr">일하는 원칙</p>
+      </div>
+      <ul class="pr-grid">
+        <li class="pr">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="10" width="24" height="12" rx="6"/><circle cx="22" cy="16" r="3"/></svg>
+          <h3>직원은 새 툴을 배우지 않습니다</h3>
+          <p>결과는 지금 쓰는 메신저, 시트, 관리자 화면으로 받습니다. 새 프로그램 사용법을 따로 익힐 필요가 없습니다.</p>
+        </li>
+        <li class="pr">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 27h24M8 27v-6M14 27v-10M20 27v-14M26 27V7"/></svg>
+          <h3>한 가지 업무부터 시작합니다</h3>
+          <p>손이 가장 많이 가는 업무 하나로 시작해, 줄어든 시간과 비용을 확인한 뒤 다음 업무로 넓힙니다.</p>
+        </li>
+        <li class="pr">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="7" r="3.5"/><circle cx="7" cy="24" r="3.5"/><circle cx="25" cy="24" r="3.5"/><path d="M14.3 10.1 8.7 20.9M17.7 10.1l5.6 10.8M10.5 24h11"/></svg>
+          <h3>여러 AI가 함께 일합니다</h3>
+          <p>Claude, Gemini, GPT 등 각자 잘하는 AI가 역할을 나눠 맡고, 서로의 결과를 넘겨받아 검토합니다. 특정 AI 하나에 묶이지 않아 나중에 바꾸기도 쉽습니다.</p>
+        </li>
+        <li class="pr">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13 16 5l11 8v14H5z"/><path d="M12 27v-8h8v8"/></svg>
+          <h3>회사 데이터는 회사 안에 둡니다</h3>
+          <p>데이터는 회사 드라이브와 서버에 그대로 두고, 작업에 필요한 만큼만 읽어 옵니다.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <svg class="calm" id="calm" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+    <div class="wrap contact-inner">
+      <p class="eyebrow">Contact</p>
+      <h2 class="h-xl">Let’s connect<br>your work.</h2>
+      <p class="contact-kr">가장 자주 반복되는 일 하나를 알려주세요. 그 일부터 같이 정리합니다.</p>
+      <div class="mail-row">
+        <a class="mail" id="mail" href="mailto:soyuzpop@naver.com">soyuzpop@naver.com</a>
+        <button class="copy" id="copyBtn" type="button">주소 복사</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="logo" href="#top">a<b>3</b>lab</a>
+    <p>상호 a3lab · 사업자등록번호 739-09-01304</p>
+    <p class="kw">connect · automate · adopt</p>
+    <p>© 2026 a3lab</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const el = (tag, attrs) => { const e = document.createElementNS(NS, tag); if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+
+  /* ---------- hero line field ---------- */
+  const hero = $('#top'), field = $('#field'), meta = $('.hero-meta'), snr = $('#snr');
+  if (matchMedia('(hover: none)').matches) $('#hint').textContent = 'Touch and drag through the noise';
+  let fW = 0, fH = 0, fLines = [], fStep = 14, fGap = 18;
+  let mx = -9999, my = -9999, pull = 0, pullT = 0;
+  const t0 = performance.now();
+
+  function heroProgress() { return reduce ? 0 : clamp(window.scrollY / ((fH || 800) * 0.7), 0, 1); }
+
+  function buildField() {
+    const hr = hero.getBoundingClientRect();
+    fW = Math.round(hr.width); fH = Math.round(hr.height);
+    const top = Math.round(meta.getBoundingClientRect().bottom - hr.top + 18);
+    field.setAttribute('viewBox', `0 0 ${fW} ${fH}`);
+    field.textContent = '';
+    const span = Math.max(160, fH - top);
+    fGap = fW < 600 ? 13 : 17;
+    const n = Math.max(10, Math.round(span / fGap));
+    fGap = span / n;
+    fStep = fW < 600 ? 9 : 12;
+    const sigIndex = Math.round(n * 0.38);
+    fLines = [];
+    let sig = null;
+    for (let i = 0; i < n; i++) {
+      const p = el('path');
+      const isSig = i === sigIndex;
+      if (isSig) { p.setAttribute('class', 'sig'); sig = p; }
+      field.appendChild(p);
+      fLines.push({ el: p, y0: top + (i + 0.5) * fGap, depth: 0.45 + 0.8 * i / (n - 1), sig: isSig, ph: i * 0.73 });
+    }
+    if (sig) field.appendChild(sig);
+    drawField(performance.now());
+  }
+
+  function drawField(now) {
+    const t = reduce ? 0 : (now - t0) / 1000;
+    const p = heroProgress();
+    const calm = Math.pow(1 - p, 1.4);
+    const k = reduce ? 1 : clamp((now - t0) / 1600, 0, 1);
+    const intro = 1 + 0.9 * Math.pow(1 - k, 3);
+    const A = fGap * 1.3;
+    const R2 = 2 * 110 * 110;
+    for (const L of fLines) {
+      const amp = A * L.depth * calm * intro * (L.sig ? 0.5 : 1);
+      let d = '';
+      for (let x = 0; x <= fW + fStep; x += fStep) {
+        let y = L.y0
+          + amp * (Math.sin(x * 0.0058 + t * 0.55 + L.ph) * 0.55
+          + Math.sin(x * 0.0149 - t * 0.8 + L.ph * 1.7) * 0.3
+          + Math.sin(x * 0.037 + t * 1.3 + L.ph * 2.9) * 0.15);
+        if (pull > 0.002) {
+          const dx = x - mx, dy = L.y0 - my;
+          const f = Math.exp(-(dx * dx + dy * dy) / R2);
+          y += (dy >= 0 ? 1 : -1) * f * 46 * pull;
+        }
+        d += (x === 0 ? 'M' : 'L') + x + ' ' + y.toFixed(1);
+      }
+      L.el.setAttribute('d', d);
+    }
+  }
+
+  let heroVisible = true, heroRaf = 0;
+  function heroLoop(now) {
+    heroRaf = 0;
+    pull += (pullT - pull) * 0.08;
+    drawField(now);
+    if (heroVisible) heroRaf = requestAnimationFrame(heroLoop);
+  }
+  function startHero() { if (!reduce && !heroRaf) heroRaf = requestAnimationFrame(heroLoop); }
+  hero.addEventListener('pointermove', e => {
+    const r = field.getBoundingClientRect();
+    mx = e.clientX - r.left; my = e.clientY - r.top; pullT = 1;
+  });
+  hero.addEventListener('pointerleave', () => { pullT = 0; });
+  hero.addEventListener('pointercancel', () => { pullT = 0; });
+  hero.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') pullT = 0; });
+
+  /* ---------- flow diagram ---------- */
+  const SRC = [
+    { id: 'db', ko: '상품 DB' }, { id: 'sheet', ko: '구글 시트' },
+    { id: 'docs', ko: '사내 문서' }, { id: 'inbox', ko: '고객 문의' }
+  ];
+  const OUT = [
+    { id: 'detail', ko: '상세페이지 초안' }, { id: 'image', ko: '상품 이미지' },
+    { id: 'report', ko: '주간 리포트' }, { id: 'reply', ko: '답변 초안' }
+  ];
+  const AG = [
+    { id: 'claude', name: 'Claude', ang: -Math.PI / 2 },
+    { id: 'gemini', name: 'Gemini', ang: Math.PI / 6 },
+    { id: 'gpt', name: 'GPT', ang: 5 * Math.PI / 6 }
+  ];
+  const SCN = {
+    db: { outs: ['detail', 'image'], agents: ['claude', 'gemini'], text: '상품 코드를 고르면 Claude가 소재와 핏 정보를 읽어 상세페이지 문구를 쓰고, Gemini가 그 문구에 맞춰 상품 이미지 초안을 만듭니다.' },
+    sheet: { outs: ['report'], agents: ['gpt', 'claude'], text: 'GPT가 매출과 재고 시트를 집계하고, Claude가 요약 리포트로 정리해 매주 월요일 아침 메신저로 보냅니다.' },
+    docs: { outs: ['reply'], agents: ['gpt', 'gemini'], text: 'GPT가 사내 규정과 매뉴얼에서 근거를 찾아 답을 쓰고, Gemini가 출처와 내용을 한 번 더 확인합니다.' },
+    inbox: { outs: ['reply'], agents: ['gemini', 'claude'], text: 'Gemini가 들어온 문의를 유형별로 나누고, Claude가 이전 응대 기록을 참고해 답변 초안을 씁니다.' }
+  };
+  const OUT2SRC = { detail: 'db', image: 'db', report: 'sheet', reply: 'inbox' };
+  const stage = $('#flowStage'), fsvg = $('#flowSvg'), capRoute = $('#capRoute'), capText = $('#capText');
+  let sel = 'db', edges = [], teamEdges = [], agentEls = {}, flowW = 0;
+
+  function nodeG(b, kind, fs, lh) {
+    const g = el('g', { class: 'node', tabindex: '0', role: 'button', 'data-id': b.id, 'data-kind': kind, 'aria-label': b.ko, 'aria-pressed': 'false' });
+    g.appendChild(el('rect', { x: b.x + 0.5, y: b.y + 0.5, width: b.w - 1, height: b.h - 1, rx: Math.min((b.h - 1) / 2, 23) }));
+    const t = el('text', { 'text-anchor': 'middle', 'font-size': fs });
+    const firstY = b.y + b.h / 2 - (b.lines.length - 1) * lh / 2 + fs * 0.36;
+    b.lines.forEach((ln, i) => {
+      const ts = el('tspan', { x: b.x + b.w / 2, y: (firstY + i * lh).toFixed(1) });
+      ts.textContent = ln; t.appendChild(ts);
+    });
+    g.appendChild(t);
+    return g;
+  }
+
+  function buildFlow() {
+    const W = Math.round(stage.clientWidth);
+    if (!W) return;
+    flowW = W;
+    const narrow = W < 640;
+    fsvg.textContent = '';
+    const gE = el('g'), gD = el('g'), gN = el('g');
+    let H, hub, src, out, fs, lh;
+    const head = 30;
+    if (!narrow) {
+      fs = 14; lh = 18;
+      const pw = Math.min(188, Math.round(W * 0.24)), ph = 46, r = 80;
+      const span = 400 - ph;
+      src = SRC.map((s, i) => ({ ...s, x: 0, y: head + Math.round(i * span / 3), w: pw, h: ph, lines: [s.ko] }));
+      out = OUT.map((o, i) => ({ ...o, x: W - pw, y: head + Math.round(i * span / 3), w: pw, h: ph, lines: [o.ko] }));
+      hub = { x: W / 2, y: head + 200, r };
+      H = head + 400 + 2;
+    } else {
+      fs = 13; lh = 16;
+      const gap = 8, pw = (W - gap * 3) / 4, r = 64;
+      const mk = (arr, y) => arr.map((o, i) => ({ ...o, x: i * (pw + gap), y, w: pw, h: 20 + o.ko.split(' ').length * lh, lines: o.ko.split(' ') }));
+      src = mk(SRC, head);
+      const sh = Math.max(...src.map(b => b.h)); src.forEach(b => { b.h = sh; });
+      hub = { x: W / 2, y: head + sh + 72 + r, r };
+      out = mk(OUT, hub.y + r + 72);
+      const oh = Math.max(...out.map(b => b.h)); out.forEach(b => { b.h = oh; });
+      H = out[0].y + oh + 30;
+    }
+    fsvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    fsvg.setAttribute('width', W);
+    fsvg.setAttribute('height', H);
+
+    const c1 = el('text', { class: 'colhead', x: 0, y: narrow ? 14 : 14 });
+    c1.textContent = 'IN · 회사에 있는 것';
+    const c2 = el('text', { class: 'colhead', x: narrow ? 0 : W, y: narrow ? out[0].y + out[0].h + 22 : 14, 'text-anchor': narrow ? 'start' : 'end' });
+    c2.textContent = 'OUT · 직원이 받는 것';
+    fsvg.append(c1, c2, gE, gD);
+
+    edges = [];
+    const onHub = a => ({ x: hub.x + Math.cos(a) * hub.r, y: hub.y + Math.sin(a) * hub.r });
+    src.forEach((b, i) => {
+      let d;
+      if (!narrow) {
+        const a = { x: b.x + b.w, y: b.y + b.h / 2 }, e = onHub(Math.PI + (1.5 - i) * 0.34), kx = (e.x - a.x) * 0.55;
+        d = `M${a.x} ${a.y} C${a.x + kx} ${a.y} ${e.x - kx} ${e.y} ${e.x} ${e.y}`;
+      } else {
+        const a = { x: b.x + b.w / 2, y: b.y + b.h }, e = onHub(-Math.PI / 2 - (1.5 - i) * 0.42), ky = (e.y - a.y) * 0.55;
+        d = `M${a.x} ${a.y} C${a.x} ${a.y + ky} ${e.x} ${e.y - ky} ${e.x} ${e.y}`;
+      }
+      edges.push({ d, src: b.id });
+    });
+    out.forEach((b, i) => {
+      let d;
+      if (!narrow) {
+        const s = onHub(-(1.5 - i) * 0.34), z = { x: b.x, y: b.y + b.h / 2 }, kx = (z.x - s.x) * 0.55;
+        d = `M${s.x} ${s.y} C${s.x + kx} ${s.y} ${z.x - kx} ${z.y} ${z.x} ${z.y}`;
+      } else {
+        const s = onHub(Math.PI / 2 + (1.5 - i) * 0.42), z = { x: b.x + b.w / 2, y: b.y }, ky = (z.y - s.y) * 0.55;
+        d = `M${s.x} ${s.y} C${s.x} ${s.y + ky} ${z.x} ${z.y - ky} ${z.x} ${z.y}`;
+      }
+      edges.push({ d, out: b.id });
+    });
+    edges.forEach((e, i) => {
+      e.el = el('path', { class: 'edge', d: e.d });
+      e.dot = el('circle', { class: 'dot', r: 2.5 });
+      gE.appendChild(e.el); gD.appendChild(e.dot);
+      e.len = e.el.getTotalLength();
+      e.off = (i * 0.37) % 1;
+    });
+
+    const hubG = el('g', { class: 'hub', 'aria-hidden': 'true' });
+    hubG.appendChild(el('circle', { class: 'hub-ring', cx: hub.x, cy: hub.y, r: hub.r }));
+    const tr = narrow ? 34 : 42, ar = narrow ? 22 : 27;
+    const ap = {};
+    AG.forEach(a => { ap[a.id] = { x: hub.x + Math.cos(a.ang) * tr, y: hub.y + Math.sin(a.ang) * tr }; });
+    const gT = el('g'), gTD = el('g'), gA = el('g');
+    teamEdges = [];
+    [['claude', 'gemini'], ['gemini', 'gpt'], ['gpt', 'claude']].forEach(([a, b], i) => {
+      const e = { a, b, off: i * 0.6 };
+      e.el = el('path', { class: 'tedge', d: `M${ap[a].x.toFixed(1)} ${ap[a].y.toFixed(1)} L${ap[b].x.toFixed(1)} ${ap[b].y.toFixed(1)}` });
+      e.dot = el('circle', { class: 'dot', r: 2 });
+      gT.appendChild(e.el); gTD.appendChild(e.dot);
+      e.len = e.el.getTotalLength();
+      teamEdges.push(e);
+    });
+    agentEls = {};
+    AG.forEach(a => {
+      const g = el('g', { class: 'agent' });
+      g.appendChild(el('circle', { cx: ap[a.id].x.toFixed(1), cy: ap[a.id].y.toFixed(1), r: ar }));
+      const t = el('text', { x: ap[a.id].x.toFixed(1), y: (ap[a.id].y + 4).toFixed(1), 'text-anchor': 'middle', 'font-size': 11 });
+      t.textContent = a.name;
+      g.appendChild(t);
+      gA.appendChild(g);
+      agentEls[a.id] = g;
+    });
+    hubG.append(gT, gTD, gA);
+    if (narrow) {
+      const lx = hub.x + hub.r + 12;
+      const lbl = el('text', { class: 'hub-t2', x: lx, y: hub.y - 4 });
+      const s1 = el('tspan', { x: lx, dy: 0 }); s1.textContent = 'AI TEAM';
+      const s2 = el('tspan', { x: lx, dy: 15 }); s2.textContent = '+ MEMORY';
+      lbl.append(s1, s2);
+      hubG.appendChild(lbl);
+    } else {
+      const lbl = el('text', { class: 'hub-t2', x: hub.x, y: hub.y + hub.r + 24, 'text-anchor': 'middle' });
+      lbl.textContent = 'AI TEAM + SHARED MEMORY';
+      hubG.appendChild(lbl);
+    }
+    fsvg.appendChild(hubG);
+
+    src.forEach(b => gN.appendChild(nodeG(b, 'src', fs, lh)));
+    out.forEach(b => gN.appendChild(nodeG(b, 'out', fs, lh)));
+    fsvg.appendChild(gN);
+    applySel();
+    placeDots(performance.now());
+  }
+
+  function applySel() {
+    const s = SCN[sel];
+    edges.forEach(e => {
+      const on = e.src ? e.src === sel : s.outs.includes(e.out);
+      e.on = on;
+      e.el.classList.toggle('on', on);
+      e.dot.classList.toggle('on', on);
+      e.dot.setAttribute('r', on ? 4 : 2.5);
+    });
+    fsvg.querySelectorAll('.node').forEach(g => {
+      const id = g.dataset.id;
+      const on = g.dataset.kind === 'src' ? id === sel : s.outs.includes(id);
+      g.classList.toggle('on', on);
+      g.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    AG.forEach(a => { if (agentEls[a.id]) agentEls[a.id].classList.toggle('on', s.agents.includes(a.id)); });
+    teamEdges.forEach(e => {
+      e.on = s.agents.includes(e.a) && s.agents.includes(e.b);
+      e.el.classList.toggle('on', e.on);
+      e.dot.classList.toggle('on', e.on);
+      e.dot.setAttribute('r', e.on ? 3.5 : 2);
+    });
+    capRoute.textContent = SRC.find(x => x.id === sel).ko + ' → ' + s.agents.map(id => AG.find(a => a.id === id).name).join(' + ') + ' → ' + s.outs.map(o => OUT.find(x => x.id === o).ko).join(' · ');
+    capText.textContent = s.text;
+  }
+
+  function placeDots(now) {
+    const t = now / 1000;
+    for (const e of edges) {
+      const k = reduce ? 0.5 : ((t / (e.on ? 1.7 : 3.4)) + e.off) % 1;
+      const pt = e.el.getPointAtLength(k * e.len);
+      e.dot.setAttribute('cx', pt.x.toFixed(1));
+      e.dot.setAttribute('cy', pt.y.toFixed(1));
+    }
+    for (const e of teamEdges) {
+      let k = 0.5;
+      if (!reduce) { const u = ((t / (e.on ? 0.9 : 2.4)) + e.off) % 2; k = u < 1 ? u : 2 - u; }
+      const pt = e.el.getPointAtLength(k * e.len);
+      e.dot.setAttribute('cx', pt.x.toFixed(1));
+      e.dot.setAttribute('cy', pt.y.toFixed(1));
+    }
+  }
+
+  function choose(g) {
+    if (!g) return;
+    const id = g.dataset.id;
+    const next = g.dataset.kind === 'src' ? id : OUT2SRC[id];
+    if (next !== sel) { sel = next; applySel(); }
+  }
+  fsvg.addEventListener('click', e => choose(e.target.closest('.node')));
+  fsvg.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { const g = e.target.closest('.node'); if (g) { e.preventDefault(); choose(g); } }
+  });
+  fsvg.addEventListener('pointerover', e => { if (e.pointerType === 'mouse') choose(e.target.closest('.node')); });
+
+  let flowVisible = false, flowRaf = 0;
+  function flowLoop(now) {
+    flowRaf = 0;
+    placeDots(now);
+    if (flowVisible) flowRaf = requestAnimationFrame(flowLoop);
+  }
+
+  /* ---------- contact calm lines ---------- */
+  const calm = $('#calm');
+  for (let i = 0; i < 18; i++) {
+    const y = ((i + 0.5) * 100 / 18).toFixed(2);
+    calm.appendChild(el('line', { x1: 0, x2: 100, y1: y, y2: y, class: i === 11 ? 'sig' : '' }));
+  }
+
+  /* ---------- copy email ---------- */
+  const mail = $('#mail'), copyBtn = $('#copyBtn');
+  const label = copyBtn.textContent;
+  function selectMail() {
+    const r = document.createRange(); r.selectNodeContents(mail);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    copyBtn.textContent = '주소를 선택했습니다';
+    setTimeout(() => { copyBtn.textContent = label; }, 2200);
+  }
+  copyBtn.addEventListener('click', () => {
+    try {
+      navigator.clipboard.writeText(mail.textContent.trim()).then(() => {
+        copyBtn.textContent = '복사했습니다';
+        setTimeout(() => { copyBtn.textContent = label; }, 1600);
+      }, selectMail);
+    } catch (err) { selectMail(); }
+  });
+
+  /* ---------- scroll: parallax, progress, nav ---------- */
+  const nav = $('.nav'), wordmark = $('#wordmark');
+  const parEls = [...document.querySelectorAll('[data-speed]')];
+  const marquee = $('.marquee'), mqRows = [...document.querySelectorAll('.mq')];
+  const steps = [...document.querySelectorAll('.step')], stepsList = $('#steps');
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY, vh = window.innerHeight;
+    nav.classList.toggle('scrolled', y > 8);
+
+    const p = heroProgress();
+    const pr = Math.round(p * 100);
+    snr.innerHTML = `noise <b>${100 - pr}</b>% / signal <b>${pr}</b>%`;
+
+    const sr = stepsList.getBoundingClientRect();
+    const sp = clamp((vh * 0.85 - sr.top) / (sr.height + vh * 0.25), 0, 1);
+    steps.forEach((s, i) => s.style.setProperty('--fill', clamp(sp * steps.length - i, 0, 1).toFixed(3)));
+
+    const mr = marquee.getBoundingClientRect();
+    const mp = reduce ? 0 : (vh - mr.top) * 0.35;
+    mqRows.forEach(row => {
+      const unit = row.scrollWidth / 3;
+      const dir = Number(row.dataset.dir);
+      row.style.transform = `translate3d(${(-unit + dir * mp).toFixed(1)}px,0,0)`;
+    });
+
+    if (reduce) return;
+    if (y < fH + 200) wordmark.style.transform = `translate3d(0,${(y * 0.22).toFixed(1)}px,0)`;
+    for (const elx of parEls) {
+      const r = elx.parentElement.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) continue;
+      const c = r.top + r.height / 2 - vh / 2;
+      elx.style.transform = `translate3d(0,${(-c * Number(elx.dataset.speed)).toFixed(1)}px,0)`;
+    }
+    if (reduce || heroRaf) return;
+    drawField(performance.now());
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- observers ---------- */
+  new IntersectionObserver(es => {
+    heroVisible = es[0].isIntersecting;
+    if (heroVisible) startHero();
+  }).observe(hero);
+  new IntersectionObserver(es => {
+    flowVisible = es[0].isIntersecting;
+    if (flowVisible && !reduce && !flowRaf) flowRaf = requestAnimationFrame(flowLoop);
+  }).observe(stage);
+
+  let rzRaf = 0;
+  new ResizeObserver(() => {
+    if (rzRaf) return;
+    rzRaf = requestAnimationFrame(() => {
+      rzRaf = 0;
+      buildField();
+      if (Math.round(stage.clientWidth) !== flowW) buildFlow();
+      update();
+    });
+  }).observe(document.body);
+
+  buildField();
+  buildFlow();
+  update();
+  startHero();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { buildField(); buildFlow(); update(); });
+})();
+</script>
+</body>
+</html>
