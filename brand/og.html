@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>a3lab link preview 1200x630</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@500;600&display=block">
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#faf9f9}
+.card{position:relative;width:1200px;height:630px;overflow:hidden;color:#1c1a1b;font-family:"IBM Plex Sans KR","Apple SD Gothic Neo",sans-serif;word-break:keep-all}
+svg{position:absolute;inset:0;display:block}
+path{fill:none;stroke:#aaa3a7;stroke-width:1.5}
+path.sig{stroke:#e0005f;stroke-width:3}
+.top{position:absolute;left:72px;right:72px;top:62px;display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:#5e595c}
+.top .eb{display:flex;align-items:center;gap:14px}
+.top .eb::before{content:"";width:10px;height:10px;border-radius:50%;background:#e0005f}
+.top .url{text-transform:none;letter-spacing:.02em;font-weight:500;color:#1c1a1b}
+h1{position:absolute;left:72px;top:112px;margin:0;font-weight:600;font-size:68px;line-height:1.16;letter-spacing:-.035em}
+h1 em{font-style:normal;color:#c10052}
+.wm{position:absolute;left:60px;bottom:-40px;font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-stretch:125%;font-weight:900;font-size:296px;line-height:.78;letter-spacing:-.05em;white-space:nowrap;color:#faf9f9;-webkit-text-stroke:2.5px #1c1a1b}
+</style>
+</head>
+<body>
+<div class="card">
+  <svg id="f" width="1200" height="630" viewBox="0 0 1200 630" aria-hidden="true"></svg>
+  <div class="top"><span class="eb">AI transformation studio</span><span class="url">a3lab.dev</span></div>
+  <h1>일하는 방식에<br><em>AI</em>를 연결합니다</h1>
+  <div class="wm">a3lab</div>
+</div>
+<script>
+  // Same line field as the site hero, frozen at one moment.
+  const svg = document.getElementById('f'), NS = 'http://www.w3.org/2000/svg';
+  const W = 1200, H = 630, fieldTop = 318, n = 18, gap = (H - fieldTop) / n, sigI = Math.round(n * 0.38), t = 2.4;
+  let sig = null;
+  for (let i = 0; i < n; i++) {
+    const y0 = fieldTop + (i + 0.5) * gap, depth = 0.45 + 0.8 * i / (n - 1), ph = i * 0.73;
+    const amp = gap * 1.3 * depth * (i === sigI ? 0.5 : 1);
+    let d = '';
+    for (let x = 0; x <= W + 12; x += 12) {
+      const y = y0 + amp * (Math.sin(x * 0.0058 + t * 0.55 + ph) * 0.55
+        + Math.sin(x * 0.0149 - t * 0.8 + ph * 1.7) * 0.3
+        + Math.sin(x * 0.037 + t * 1.3 + ph * 2.9) * 0.15);
+      d += (x === 0 ? 'M' : 'L') + x + ' ' + y.toFixed(1);
+    }
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d);
+    if (i === sigI) { p.setAttribute('class', 'sig'); sig = p; }
+    svg.appendChild(p);
+  }
+  svg.appendChild(sig);
+</script>
+</body>
+</html>
