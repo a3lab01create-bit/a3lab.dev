@@ -27,10 +27,23 @@ DESC = ("a3lab은 회사에 이미 있는 데이터와 도구를 AI 에이전트
         "Claude, Gemini, GPT 등 여러 AI가 역할을 나눠 반복 업무를 처리합니다.")
 OG_ALT = "a3lab 로고와 '일하는 방식에 AI를 연결합니다' 문구"
 
+# Google Analytics (GA4). Google asks for it right after <head>.
+GA_ID = "G-6CPVVVQCG3"
+GTAG = f"""<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+
+  gtag('config', '{GA_ID}');
+</script>
+"""
+
 HEAD = f"""<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+{GTAG}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{TITLE}</title>
 <meta name="description" content="{DESC}">
